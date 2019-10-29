@@ -3,23 +3,23 @@
 
 
 class Validator:
-    def __init__(self, text_to_validate: str = '', brackets: str = ''):
-        self.text_to_validate = text_to_validate
+    def __init__(self, brackets: str = ''):
+        #self.text_to_validate = text_to_validate
         self.opened_brackets = ''
         self.closed_brackets = ''
         for i in range(len(brackets)):
             if i % 2 == 0:
                 self.opened_brackets += brackets[i]
             else:
-                self. closed_brackets += brackets[i]
+                self.closed_brackets += brackets[i]
 
 
-    def validate(self) -> str:
+    def validate(self, text_to_validate: str = '') -> str:
         result = []
-        for line in self.text_to_validate.split('\n'):
+        for line in text_to_validate.split('\n'):
             is_valid = self._is_valid(line)
-            is_valid_str = " is_valid" if is_valid else " is_not_valid" # Если is_valid = True, то is_valid_str = "is_valid", иначе is_valid_str = "is_not_valid"
-            result.append(f'{line} {is_valid_str}')# 'python f string' загуглить
+            is_valid_str = " is_valid" if is_valid else " is_not_valid"
+            result.append(f'{line} {is_valid_str}')
         return '\n'.join(result)
 
     def _is_valid(self, line) -> bool:
@@ -34,9 +34,6 @@ class Validator:
                     return False
                 else:
                     stack.pop()
-        if stack == []:
-            return True
-        else:
-            return False
+        return stack == []
 
 

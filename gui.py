@@ -21,17 +21,17 @@ class Window(QMainWindow):
 
     def initUI(self):
 
-        exitAction = QAction(QIcon('exit.png'), 'Exit', self)
+        exitAction = QAction(QIcon('resources/exit.png'), 'Exit', self)
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit application')
         exitAction.triggered.connect(self.close)
 
-        openAction = QAction(QIcon('open.png'), 'Open file', self)
+        openAction = QAction(QIcon('resources/open.png'), 'Open file', self)
         openAction.setShortcut('Ctrl+O')
         openAction.setStatusTip('Open file for validation')
         openAction.triggered.connect(self.OpenFile)
 
-        howToUseAction = QAction(QIcon('how_to.png'), 'How to use', self) #заменить иконку
+        howToUseAction = QAction(QIcon('resources/how_to.png'), 'How to use', self)
         howToUseAction.setStatusTip('How to use validator')
         howToUseAction.triggered.connect(self.InfoWindow)
 
@@ -80,10 +80,7 @@ class Window(QMainWindow):
         if len(brackets) % 2 != 0 or brackets == '':
             QMessageBox.warning(self, 'Alarm', 'Incorrect number of brackets')
 
-        validator = Validator(
-            self.inputTextEdit.toPlainText(),
-            brackets
-        )
-        self.inputTextEdit.setText(validator.validate())
+        validator = Validator(brackets)
+        self.inputTextEdit.setText(validator.validate(self.inputTextEdit.toPlainText()))
 
 
