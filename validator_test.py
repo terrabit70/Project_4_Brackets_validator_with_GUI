@@ -24,6 +24,11 @@ class ValidatorTests(unittest.TestCase):
         self.assertTrue(validator._is_valid('My test text [{<( with brackets )>}] '))
         self.assertFalse(validator._is_valid('()}{[]>>)'))
 
+    def test_incompatinble_type_of_input(self):
+        validator = Validator('()')
+        with self.assertRaises(TypeError):
+            validator._is_valid(42)
+
 
 
 if __name__ == '__main__':
